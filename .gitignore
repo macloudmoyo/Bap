@@ -6,3 +6,4 @@ dist/
 build/
 bap_dashboard.html
 bap_template.csv
+_bap_serve/

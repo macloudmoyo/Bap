@@ -156,6 +156,11 @@ def main() -> None:
     dash_parser.add_argument("input", help="Path to input CSV file")
     dash_parser.add_argument("-o", "--output", help="Output HTML file (default: bap_dashboard.html)")
 
+    # serve command
+    serve_parser = subparsers.add_parser("serve", help="Launch local dashboard server")
+    serve_parser.add_argument("input", help="Path to input CSV file")
+    serve_parser.add_argument("-p", "--port", type=int, default=8080, help="Port (default: 8080)")
+
     # template command
     template_parser = subparsers.add_parser("template", help="Generate a blank CSV template")
     template_parser.add_argument("-o", "--output", help="Output path (default: bap_template.csv)")
@@ -166,6 +171,9 @@ def main() -> None:
         run_score(args)
     elif args.command == "dashboard":
         run_dashboard(args)
+    elif args.command == "serve":
+        from .server import serve
+        serve(args.input, args.port)
     elif args.command == "template":
         run_template(args)
     else:
